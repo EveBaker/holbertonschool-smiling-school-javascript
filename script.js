@@ -5,6 +5,12 @@ $(document).ready(function() {
         type: 'GET',
         beforeSend: function() {
             $("#MyLoader").show();
+        },
+        success: function(request) {
+            $("MyLoader").hide();
+            for (const i = 0; i < request.length; i++) {
+                const $html = $()
+            }
         }
     })
 })
