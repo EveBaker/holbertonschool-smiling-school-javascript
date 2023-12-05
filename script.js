@@ -7,7 +7,7 @@ $(document).ready(function() {
             $("#MyLoader").show();
         },
         success: function(request) {
-            $("MyLoader").hide();
+            $("#MyLoader").hide();
             for (const i = 0; i < request.length; i++) {
                 const $html = $(`
                 <div class="carousel-item carousel-item-content ${i === 0 ? 'active' : ''}">
