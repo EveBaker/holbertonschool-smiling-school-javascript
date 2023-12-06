@@ -223,22 +223,105 @@
   margin-right: 250px;
 }
 
-.bk-color {
-  background-color: #C271FF;
-}
+
 /* POPULAR SECTION  */
 
-.play-img {
-  position: absolute;
-  margin-top: 30%;
-  margin-left: 50%;
-  transform: translate(-50%, -50%);
+.popular {
+  height: auto;
+  background-color: var(--color-white);
 }
 
-.stars p {
-  color: #C271FF;
+.popular .section-header {
+  padding-top: 87px;
+  padding-bottom: 75px;
+  color: var(--background-color);
 }
 
+.section .card {
+  border: 0;
+  width: 16rem;
+}
+
+.popular .card {
+  padding-bottom: 87px;
+}
+
+.section .card-img-overlay {
+  /* top: 25px; */
+  top: 5%;
+}
+.section .card-title {
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--background-color);
+}
+
+.section .card-text {
+  font-size: 14px;
+  line-height: 24px;
+}
+
+
+@media screen and (max-width: 1280px) {
+  :root {
+    --popular-arrows-x: -4vw;
+  }
+  .section .card {
+    width: 19vw;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  :root {
+    --popular-arrows-x: -3vw;
+  }
+  .section .card-img-overlay {
+    /* top: 25px; */
+    top: 4%;
+  }
+  .section .card-img-overlay img {
+    width: 35%;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  :root {
+    --popular-arrows-x: -3vw;
+  }
+
+  .section .card {
+    width: 16rem;
+  }
+  .section .card-img-overlay img {
+    width: 30%;
+  }
+  .section .card-img-overlay {
+    /* top: 25px; */
+    top: 5%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  :root {
+    --popular-arrows-x: -6vw;
+  }
+  .section .card {
+    width: 16rem;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  :root {
+    --popular-arrows-x: -15px;
+  }
+  .section .card-img-overlay img {
+    width: 30%;
+  }
+  .section .card-img-overlay {
+    /* top: 25px; */
+    top: 5%;
+  }
+}
 
 /* SMILES Section  */
 
