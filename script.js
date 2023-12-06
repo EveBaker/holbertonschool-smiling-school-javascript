@@ -27,22 +27,3 @@ $(document).ready(function() {
         },
     })
 });
-
-// Tutorials
-$.ajax({
-    url: 'https://smileschool-api.hbtn.info/popular-tutorials',
-    type: "get",
-    beforeSend: function () {
-        $("#VideoLoader").show();
-    },
-    success: function (response) {
-        $("#VideoLoader").hide();
-        for(const i = 0; i < response.length; i++) {
-            const $stars = "";
-        }
-        for (const j = 0; j < response[i].star; j++) {
-            $stars += '<img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple"  width="15" height="15">';
-        }
-        for (const j = 0; j < 5 - response[i].star; j++) {
-            $stars += '<img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple"  width="15" height="15">';
-        }
