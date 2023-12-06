@@ -27,3 +27,13 @@ $(document).ready(function() {
         },
     })
 });
+
+// Tutorials
+$.ajax({
+    url: 'https://smileschool-api.hbtn.info/popular-tutorials',
+    type: "get",
+    beforeSend: function () {
+        $("#VideosLoader").show();
+    },
+    success: function (response) {
+        $("#VideosLoader").hide();
