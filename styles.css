@@ -208,19 +208,19 @@
   }
 }
 
-.pink-bg {
-  background-color: #c271ff;
-  color: #c271ff;
+.quotes-section {
+  background-color: var(--purple-color);
+  padding: var(--section-padding);
 }
 
-#quotes {
-  color: white;
+.quotes-section img {
+  width: 125px;
+  height: 125px;
 }
-.blackarrow-right {
-  margin-left: 250px;
-}
-.blackarrow-left {
-  margin-right: 250px;
+
+.carousel-item-content {
+  padding-right: 80px;
+  padding-left: 80px;
 }
 
 

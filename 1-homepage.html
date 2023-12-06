@@ -117,19 +117,21 @@
     </header>
 
     <!--Quotes-->
-    <section class="pink-bg d-flex align-items-center p-5">
-      <div id="quotes" class="row carousel slide container-md ml-5" data-ride="carousel">
-        <div id="carousel" class="carousel-inner my-text">
-          <div id="loaderDiv" class="loader"></div>
+    <section class="quotes-section">
+      <div id="quotesControls" class="carousel slide container-md" data-ride="carousel">
+          <div id="quotesInner" class="carousel-inner">
+            <div id="loaderDiv" class="loader"></div>
           </div>
-          <a class="carousel-control-prev " href="#quotes" data-slide="prev">
-            <span><img src="/images/arrow_white_left.png" alt="arrow left" width="50" height="80" class="whitearrow-left"></span>
-        </a>
-        <a class="carousel-control-next " href="#quotes" data-slide="next">
-            <span><img src="/images/arrow_white_right.png" alt="arrow right" width="50" height="80" class="whitearrow-right"></span>
-        </a>
+          <a class="carousel-control-prev" href="#quotesControls" role="button" data-slide="prev">
+            <span class="images-icon-arrow_4 display-1" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#quotesControls" role="button" data-slide="next">
+            <span class="images-icon-arrow_3 display-1" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
       </div>
-    </section>
+  </section>
 
       <!--Tutorials-->
       <section class="popular section d-flex align-items-center">
