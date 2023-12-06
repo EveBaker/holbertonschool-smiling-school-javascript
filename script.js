@@ -2,12 +2,12 @@
 $(document).ready(function() {
     $.ajax({
         url: 'https://smileschool-api.hbtn.info/quotes',
-        type: 'GET',
+        type: 'get',
         beforeSend: function() {
-            $("#MyLoader").show();
+            $("#loaderDiv").show();
         },
         success: function(request) {
-            $("#MyLoader").hide();
+            $("#loaderDiv").hide();
             for (const i = 0; i < request.length; i++) {
                 const $html = $(`
                 <div class="carousel-item carousel-item-content ${i === 0 ? 'active' : ''}">
@@ -22,7 +22,7 @@ $(document).ready(function() {
                     </div>
                 </div>
             </div>`);
-            $("#quotesInner").append($html);
+            $("#carousel").append($html);
             }
         },
     })
