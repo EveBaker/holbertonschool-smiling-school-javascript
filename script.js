@@ -13,7 +13,7 @@ $(document).ready(function() {
               <div class="carousel-item carousel-item-content ${i === 0 ? 'active' : ''}">
                   <div class="row">
                       <div class="col-sm-3 text-center">
-                          <img class="rounded-circle" src=${request[i].pic_url} class="d-block w-100" alt="random alt image">
+                          <img class="rounded-circle d-block w-100" src="${request[i].pic_url}" alt="Profile Image">
                       </div>
                       <div class="col-sm-8 ml-3 d-flex flex-column">
                           <div>&lt;&lt; ${request[i].text} &gt;&gt;</div>
@@ -22,11 +22,16 @@ $(document).ready(function() {
                       </div>
                   </div>
               </div>`);
-              $("#quotescarousel-inner").append($html);
+              $("#carousel-inner").append($html);
           }
       },
-  })
+      error: function(error) {
+          console.log("Error: ", error);
+          $("#loaderDiv").hide();
+      }
+  });
 });
+
 
 
   $.ajax({
