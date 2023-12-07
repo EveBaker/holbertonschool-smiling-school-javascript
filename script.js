@@ -22,7 +22,7 @@ $(document).ready(function() {
                       </div>
                   </div>
               </div>`);
-              $("#quotesCarouselInner").append($html);
+              $("#quotescarousel-inner").append($html);
           }
       },
   })
@@ -36,7 +36,7 @@ $(document).ready(function() {
       $("#TutorialAreaLoader").show();
       },
       success: function(request) {
-      $("#TutorialAreaLoader").hide();
+      $("#tutorial").hide();
       for (let i = 0; i < request.length; i++) {
           let $reviewstars = "";
           for (let j = 0; j < request[i].star; j++) {
@@ -71,7 +71,7 @@ $(document).ready(function() {
                       </div>
                   </div>
               </div>`);
-              $("#TutorialArea").append($html);
+              $("#tutorial").append($html);
           }
       },
   });
