@@ -76,7 +76,7 @@ $.ajax({
                       </div>
                   </div>
               </div>`);
-          $("#tutorial").append($html); // Changed to append to the #tutorial container
+          $("#tutorial").append($html);
       }
   },
 });
