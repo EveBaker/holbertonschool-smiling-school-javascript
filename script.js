@@ -34,25 +34,25 @@ $(document).ready(function() {
 
 
 
-  $.ajax({
-      url: 'https://smileschool-api.hbtn.info/popular-tutorials',
-      type: 'GET',
-      beforeSend: function() {
-      $("#TutorialAreaLoader").show();
-      },
-      success: function(request) {
-      $("#tutorial").hide();
+$.ajax({
+  url: 'https://smileschool-api.hbtn.info/popular-tutorials',
+  type: 'GET',
+  beforeSend: function() {
+      $("#VideoLoader").show();
+  },
+  success: function(request) {
+      $("#VideoLoader").hide();
       for (let i = 0; i < request.length; i++) {
           let $reviewstars = "";
           for (let j = 0; j < request[i].star; j++) {
-          $reviewstars += '<img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="review start purple">';
+              $reviewstars += '<img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="review start purple">';
           }
           for (let j = request[i].star; j < 5; j++) {
-          $reviewstars += '<img src="./images/star_off.png" class="carousel-star-icon" alt="review star gray">';
+              $reviewstars += '<img src="./images/star_off.png" class="carousel-star-icon" alt="review star gray">';
           }
           let $html = $(`
-              <div class="text-center col-12 col-sm-6 col-md-3">
-                  <div class="carousel-item active">
+              <div class="carousel-item ${i === 0 ? 'active' : ''}">
+                  <div class="text-center col-12 col-sm-6 col-md-3">
                       <img class="w-100" src="${request[i].thumb_url}" alt="smile image">
                       <div class="mx-3">
                           <div class="font-weight-bold text-dark text-left mt-3">
@@ -67,7 +67,7 @@ $(document).ready(function() {
                           </div>
                           <div class="d-flex justify-content-between">
                               <div class="d-flex pt-1">
-                              ${$reviewstars}
+                                  ${$reviewstars}
                               </div>
                               <div class="purple-text font-weight-bold">
                                   ${request[i].duration}
@@ -76,10 +76,10 @@ $(document).ready(function() {
                       </div>
                   </div>
               </div>`);
-              $("#tutorial").append($html);
-          }
-      },
-  });
+          $("#tutorial").append($html); // Changed to append to the #tutorial container
+      }
+  },
+});
 
 
 $.ajax({

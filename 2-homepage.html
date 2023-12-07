@@ -22,7 +22,7 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
         integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
-    <script src="/scripts.js"></script>
+    <script src="/script.js"></script>
 </head>
 
 
@@ -128,17 +128,18 @@
     <!--Quotes-->
     <section class="pink-bg d-flex align-items-center p-5">
       <div id="quotes" class="row carousel slide container-md ml-5" data-ride="carousel">
-        <div id="carousel" class="carousel-inner my-text ml-5">
-          <div id="loaderDiv" class="loader"></div>
+          <div class="carousel-inner my-text" id="carousel-inner"> 
+              <div id="loaderDiv" class="loader"></div> 
           </div>
-          <a class="carousel-control-prev " href="#quotes" data-slide="prev">
-            <span><img src="/images/arrow_white_left.png" alt="arrow left" width="50" height="80" class="whitearrow-left"></span>
-        </a>
-        <a class="carousel-control-next " href="#quotes" data-slide="next">
-            <span><img src="/images/arrow_white_right.png" alt="arrow right" width="50" height="80" class="whitearrow-right"></span>
-        </a>
+          <a class="carousel-control-prev" href="#quotes" role="button" data-slide="prev">
+              <span><img src="/images/arrow_white_left.png" alt="arrow left" width="50" height="80" class="whitearrow-left"></span>
+          </a>
+          <a class="carousel-control-next" href="#quotes" role="button" data-slide="next">
+              <span><img src="/images/arrow_white_right.png" alt="arrow right" width="50" height="80" class="whitearrow-right"></span>
+          </a>
       </div>
-    </section>
+  </section>
+
 
       <!--Tutorials-->
       <section class="tutorial-section">
