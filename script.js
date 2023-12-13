@@ -4,7 +4,7 @@ $(document).ready(function() {
       url: 'https://smileschool-api.hbtn.info/quotes',
       type: 'GET',
       beforeSend: function() {
-          $("#loaderDiv").show();
+          $("#loaderDiv").show(); //shows the loader
       },
       success: function(request) {
           $("#loaderDiv").hide();
@@ -33,55 +33,57 @@ $(document).ready(function() {
 });
 
 
+//tutorials
 
 $.ajax({
   url: 'https://smileschool-api.hbtn.info/popular-tutorials',
-  type: 'GET',
-  beforeSend: function() {
+  type: "get",
+  beforeSend: function () {
       $("#VideoLoader").show();
   },
-  success: function(request) {
+  success: function (response) {
       $("#VideoLoader").hide();
-      for (let i = 0; i < request.length; i++) {
-          let $reviewstars = "";
-          for (let j = 0; j < request[i].star; j++) {
-              $reviewstars += '<img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="review start purple">';
+      for (let i = 0; i < response.length; i++) {
+          let $stars = '';
+          for (let j = 0; j < response[i].star; j++) {
+              $stars += '<img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple"  width="15" height="15">';
           }
-          for (let j = request[i].star; j < 5; j++) {
-              $reviewstars += '<img src="./images/star_off.png" class="carousel-star-icon" alt="review star gray">';
+          for (let j = 0; j < 5 - response[i].star; j++) {
+              $stars += '<img src="./images/star_off.png" class="carousel-star-icon" alt="star icon filled in grey"  width="15" height="15">';
           }
           let $html = $(`
-              <div class="carousel-item ${i === 0 ? 'active' : ''}">
-                  <div class="text-center col-12 col-sm-6 col-md-3">
-                      <img class="w-100" src="${request[i].thumb_url}" alt="smile image">
-                      <div class="mx-3">
-                          <div class="font-weight-bold text-dark text-left mt-3">
-                              ${request[i].title}
-                          </div>
-                          <div class="text-secondary text-left mt-3 mb-3">
-                              ${request[i]["sub-title"]}
-                          </div>
-                          <div class="d-flex align-items-center mb-3">
-                              <img src="${request[i].author_pic_url}" class="rounded-circle mr-3 video-carousel-img-profile" alt="profile image">
-                              <div class="purple-text font-weight-bold">${request[i].author}</div>
-                          </div>
-                          <div class="d-flex justify-content-between">
-                              <div class="d-flex pt-1">
-                                  ${$reviewstars}
-                              </div>
-                              <div class="purple-text font-weight-bold">
-                                  ${request[i].duration}
-                              </div>
-                          </div>
+      <div class="text-center col-12 col-sm-6 col-md-3">
+          <div class="carousel-item active">
+              <img class="w-100" src="${response[i].thumb_url}" alt="smile image">
+              <img src="/images/play.png" alt="play"  class="play-btn rounded-circle" width="64" height="64">
+              <div class="mx-3">
+                  <div class="font-weight-bold text-dark text-left mt-3">
+                      ${response[i].title}
+                  </div>
+                  <div class="text-secondary text-left mt-3 mb-3">
+                      ${response[i]["sub-title"]}
+                  </div>
+                  <div class="d-flex align-items-center mb-3">
+                      <img src="${response[i].author_pic_url}" class="rounded-circle mr-3 video-carousel-img-profile" alt="profile image"  width="30" height="30">
+                      <div class="purple-text font-weight-bold">${response[i].author}</div>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                      <div class="d-flex pt-1">
+                      ${$stars}
+                      </div>
+                      <div class="purple-text font-weight-bold">
+                          ${response[i].duration}
                       </div>
                   </div>
-              </div>`);
+              </div>
+          </div>
+      </div>`);
           $("#tutorial").append($html);
       }
   },
 });
 
-
+//latest video
 $.ajax({
     url: 'https://smileschool-api.hbtn.info/latest-videos',
     type: "get",
@@ -91,8 +93,8 @@ $.ajax({
     success: function(response) {
       $("#myloader").hide();
       for (let i = 0; i < response.length; i++) {
+        let $play_button = '<img src="images/play.png" alt="Play" width="64px" class="align-self-center play-overlay"/>';
         let $card_stars = '';
-        let $play_button = '<img src="images/play.png" class="play-btn1" alt="..."   width="64" height="64">';
         for (let j = 0; j < response[i].star; j++) {
           $card_stars += '<img src="images/star_on.png" class=" star-size mr-1" alt="..." width="15" height="15">';
         }
@@ -131,6 +133,7 @@ $.ajax({
     }
   });
   
+  //courses
   $.ajax({
     url: 'https://smileschool-api.hbtn.info/courses',
     type: "get",
@@ -187,7 +190,7 @@ $.ajax({
     },
   });
 
-
+//courses 2
   $.displayCourses = function($q, $t, $s) {
     $.ajax({
           url: 'https://smileschool-api.hbtn.info/courses',
