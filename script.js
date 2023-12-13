@@ -133,37 +133,33 @@ $.ajax({
   
   $.ajax({
     url: 'https://smileschool-api.hbtn.info/courses',
-    type: 'GET',
+    type: "get",
     data: {
       action: 'query',
       list: 'search',
       format: 'json',
-      // q: '',
-      // topic: 'all',
-      // sort: 'most_viewed',
     },
     beforeSend: function() {
-  $("#CoursesLoader").show();
+  $("#CourseLoader").show();
 },
-    success: function(request) {
-      $("#CoursesLoader").hide();
-      let $t = request.topics;
-        $("#topic-menu-container").append(`<button class="btn btn-secondary border-0 rounded-0 search-element w-100 text-left" type="button" id="current-topic" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    success: function(response) {
+      $("#CourseLoader").hide();
+      let $t = response.topics;
+        $("#topic-dropdownmenu").append(`<button class="btn btn-secondary border-0 rounded-0 search-element w-100 text-left" type="button" id="current-topic" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           ${$t[0].substr(0,1).toUpperCase()+ $t[0].substr(1)}
         </button>
-        <div class="dropdown-menu" id="topic-menu" aria-labelledby="topic-menu-container"></div>`);
+        <div class="dropdown-menu" id="topic-menu" aria-labelledby="topic-dropdownmenu"></div>`);
       let $topics = '';
       for (let i = 0; i < $t.length; i++) {
         $topics += `<button data-value="${$t[i]}" class="dropdown-item" type="button">${$t[i].substr(0,1).toUpperCase()+ $t[i].substr(1)}</button>`;
       }
       $("#topic-menu").append($topics);
 
-
-      let $s = request.sorts;
-        $("#sort-menu-container").append(`<button class="btn btn-secondary border-0 rounded-0 search-element w-100 text-left" type="button" id="current-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      let $s = response.sorts;
+        $("#sort-dropdownMenu").append(`<button class="btn btn-secondary border-0 rounded-0 search-element w-100 text-left" type="button" id="current-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           ${$s[0].substr(0,1).toUpperCase()+ $s[0].substr(1,3) + ' ' + $s[0].substr(5,1).toUpperCase() + $s[0].substr(6)}
         </button>
-        <div class="dropdown-menu" id="sort-menu" aria-labelledby="sort-menu-container"></div>`);
+        <div class="dropdown-menu" id="sort-menu" aria-labelledby="sort-dropdownMenu"></div>`);
       let $sorts = '';
       for (let i = 0; i < $s.length; i++) {
         $sorts += `<button data-value="${$s[i]}" class="dropdown-item" type="button">${$s[i].substr(0,1).toUpperCase()+ $s[i].substr(1,3) + ' ' + $s[i].substr(5,1).toUpperCase() + $s[i].substr(6)}</button>`;
@@ -188,14 +184,14 @@ $.ajax({
           $.displayCourses($("#user_search").val(), $('#current-topic').text().trim(), $('#current-sort').text().trim());
         }, 500);
       });
-
-    }
+    },
   });
+
 
   $.displayCourses = function($q, $t, $s) {
     $.ajax({
           url: 'https://smileschool-api.hbtn.info/courses',
-          type: 'GET',
+          type: "get",
           data: {
             action: 'query',
             list: 'search',
@@ -205,49 +201,49 @@ $.ajax({
             sort: $s,
           },
           beforeSend: function() {
-        $("#CoursesLoader").show();
-      },
-          success: function(request) {
-            $("#CoursesLoader").hide();
-            let $c = request.courses;
-            $("#coursesvideos").empty();
-            $("#numberofvideos").text(`${$c.length === 1 ? '1 video' : $c.length + ' videos'}`);
+            $("#CourseLoader").show();
+            },
+          success: function(response) {
+            $("#CourseLoader").hide();
+            let $c = response.courses;
+            $("#coursevideo").empty();
+            $("#numvideos").text(`${$c.length === 1 ? '1 video' : $c.length + ' videos'}`);
             for (let i = 0; i < $c.length; i++) {
               let $stars = '';
               for (let j = 0; j < $c[i].star; j++) {
-                $stars += '<img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">';
+                $stars += '<img src="./images/star_on.png" width="15px" height="15px">';
               }
               for (let j = 0; j < 5 - $c[i].star; j++) {
-                $stars += '<img src="./images/star_off.png" class="carousel-star-icon" alt="star icon filled in grey">';
+                $stars += '<img src="./images/star_off.png" width="15px" height="15px">';
               }
               let $html = $(`
-                  <div class="text-center col-12 col-sm-6 col-md-3">
-                      <div class="carousel-item active">
-                          <img class="w-100" src="${$c[i].thumb_url}" alt="smile image">
-                          <div class="mx-3">
-                              <div class="font-weight-bold text-dark text-left mt-3">
-                                  ${$c[i].title}
-                              </div>
-                              <div class="text-secondary text-left mt-3 mb-3">
-                                  ${$c[i]["sub-title"]}
-                              </div>
-                              <div class="d-flex align-items-center mb-3">
-                                  <img src="${$c[i].author_pic_url}" class="rounded-circle mr-3 video-carousel-img-profile" alt="profile image">
-                                  <div class="purple-text font-weight-bold">${$c[i].author}</div>
-                              </div>
-                              <div class="d-flex justify-content-between">
-                                  <div class="d-flex pt-1">
-                                  ${$stars}
-                                  </div>
-                                  <div class="purple-text font-weight-bold">
-                                      ${$c[i].duration}
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>`);
-                  $("#coursesvideos").append($html);
-                }
+              <div class="col-12 col-sm-4 col-lg-3 d-flex justify-content-center">
+              <div class="card">
+              <img src="${$c[i].thumb_url}" class="card-img-top" alt="Video thumbnail"/>
+              <div class="card-img-overlay text-center">
+                <img src="images/play.png" alt="Play" width="64px" class="align-self-center play-overlay"/>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title font-weight-bold">${$c[i].title}</h5>
+                <p class="card-text text-muted">
+                ${$c[i]["sub-title"]}
+                </p>
+                <div class="creator d-flex align-items-center">
+                  <img src="${$c[i].author_pic_url}" alt="Creator of Video" width="30px" class="rounded-circle"/>
+                  <h6 class="pl-3 m-0 main-color">${$c[i].author}</h6>
+                </div>
+                <div class="info pt-3 d-flex justify-content-between">
+                  <div class="rating">
+                    ${$stars}
+                  </div>
+                  <span class="main-color">${$c[i].duration}</span>
+                </div>
+              </div>
+            </div>
+            </div>`);
+            $("#coursevideo").append($html);
+                           
             }
-        });
-    }
+  }
+});
+}

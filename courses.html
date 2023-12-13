@@ -94,74 +94,38 @@
       </div>
     </header>
 
+    <!--search section-->
+
       <section class="section search">
         <div class="container">
           <div class="row py-4">
             <div class="col-12 col-sm-12 col-lg-4 box1">
-              <span class="text-white font-weight-bold drop-down-title">KEYWORDS</span>
+              <span class="text-white font-weight-bold drop-down-title id="user_search">KEYWORDS</span>
 
               <div class="input-group mb-sm-4">
                 <div class="input-group-prepend">
-                  <span
-                    class="input-group-text holberton_school-icon-search_1"></span>
+                  <span class="input-group-text holberton_school-icon-search_1 id="user_search"></span>
                 </div>
-                <input
-                  type="text"
+                <input type="text"
                   class="form-control search-text-area"
                   aria-label="Default"
                   aria-describedby="inputGroup-sizing-default"
+                  id="user_search"
                   placeholder="Search by keywords"
                 />
               </div>
             </div>
-            <div class="col-12 col-sm-6 col-lg-4 box2">
-              <span class="text-white font-weight-bold drop-down-title"
-                >TOPIC</span
-              >
-              <div class="dropdown">
-                <a
-                  class="btn dropdown-toggle text-left"
-                  href="#"
-                  role="button"
-                  id="dropdownMenuLink"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <span>Novice</span>
-                </a>
 
-                <div
-                  class="dropdown-menu mt-0"
-                  aria-labelledby="dropdownMenuLink"
-                >
-                  <a class="dropdown-item" href="#">Novice</a>
-                  <a class="dropdown-item" href="#">Intermediate</a>
-                  <a class="dropdown-item" href="#">Expert</a>
-                </div>
+            <div class="col-12 col-sm-6 col-lg-4 box2">
+              <span class="text-white font-weight-bold drop-down-title">TOPIC</span>
+              <div class="dropdown" id="topic-dropdownmenu">   
               </div>
             </div>
+
             <div class="col-12 col-sm-6 col-lg-4 box3">
               <span class="text-white font-weight-bold drop-down-title">SORT BY</span>
-              <div class="dropdown">
-                <a
-                  class="btn dropdown-toggle text-left"
-                  href="#"
-                  role="button"
-                  id="dropdownMenuLink"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <span>Most Popular</span>
-                </a>
-
-                <div class="dropdown-menu mt-0" aria-labelledby="dropdownMenuLink">
-                  <a class="dropdown-item" href="#">Most Popular</a>
-                  <a class="dropdown-item" href="#">Most Recent</a>
-                  <a class="dropdown-item" href="#">Most Viewed</a>
-                </div>
-              </div>
+              <div class="dropdown" id="sort-dropdownMenu"></div>
+            </div>
             </div>
           </div>
         </div>
@@ -172,8 +136,8 @@
       <section class="section results py-5">
         <div class="container">
           <div id="numberofvideos" class="mb-5 section-title ml-3 text-muted"></div>
-          <div id="coursesvideos" class="d-flex flex-wrap">
-          <div id="coursesloader" class="loader"></div>
+          <div id="coursevideo" class="d-flex flex-wrap">
+          <div id="courseloader" class="loader"></div>
         </div>
         </div>
       </section>
