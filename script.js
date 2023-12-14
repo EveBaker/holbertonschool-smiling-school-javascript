@@ -93,52 +93,53 @@ $.ajax({
   url: 'https://smileschool-api.hbtn.info/latest-videos',
   type: 'GET',
   beforeSend: function() {
-      $("#myloader").show();
+    // Show the loader
+    $("#myloader").show();
   },
   success: function(response) {
-      $("#myloader").hide();
-      let $carouselInner = $('#latestvideos'); 
-      $carouselInner.empty();
-      let $carouselItem = $('<div class="carousel-item active"></div>');
-      let $row = $('<div class="row"></div>'); 
-      response.forEach((item, index) => {
-          let starsHtml = '';
-          for (let j = 0; j < item.star; j++) {
-              starsHtml += '<img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple" width="15" height="15">';
-          }
-          for (let j = item.star; j < 5; j++) {
-              starsHtml += '<img src="./images/star_off.png" class="carousel-star-icon" alt="star icon filled in grey" width="15" height="15">';
-          }
-          let cardHtml = `
-              <div class="col-12 col-sm-6 col-md-3 d-flex align-items-stretch">
-                  <div class="card">
-                      <img class="card-img-top" src="${item.thumb_url}" alt="${item.title}">
-                      <div class="card-body">
-                          <h5 class="card-title">${item.title}</h5>
-                          <p class="card-text">${item["sub-title"]}</p>
-                          <div class="card-footer bg-transparent border-top-0">
-                              <img src="${item.author_pic_url}" class="rounded-circle mr-2 video-carousel-img-profile" alt="profile image" width="30" height="30">
-                              <small class="text-muted">${item.author}</small>
-                          </div>
-                          <div class="d-flex justify-content-between align-items-center">
-                              <div class="star-rating">${starsHtml}</div>
-                              <small class="duration text-muted">${item.duration}</small>
-                          </div>
-                      </div>
-                  </div>
+    $("#myloader").hide();
+    let $carouselInner = $('#latestvideos'); 
+    $carouselInner.empty();
+    let $carouselItem = $('<div class="carousel-item active"></div>');
+    let $row = $('<div class="row"></div>'); 
+    response.forEach((item, index) => {
+      let starsHtml = '';
+      for (let j = 0; j < item.star; j++) {
+        starsHtml += '<img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple" width="15" height="15">';
+      }
+      for (let j = item.star; j < 5; j++) {
+        starsHtml += '<img src="./images/star_off.png" class="carousel-star-icon" alt="star icon filled in grey" width="15" height="15">';
+      }
+      let cardHtml = `
+        <div class="col-12 col-sm-6 col-md-3 d-flex align-items-stretch">
+          <div class="card">
+            <img class="card-img-top" src="${item.thumb_url}" alt="${item.title}">
+            <div class="card-body">
+              <h5 class="card-title">${item.title}</h5>
+              <p class="card-text">${item["sub-title"]}</p>
+              <div class="card-footer bg-transparent border-top-0">
+                <img src="${item.author_pic_url}" class="rounded-circle mr-2 video-carousel-img-profile" alt="profile image" width="30" height="30">
+                <small class="text-muted">${item.author}</small>
               </div>
-          `;
-          $row.append(cardHtml);
-          if ((index + 1) % 4 === 0 || index === response.length - 1) {
-              $carouselItem.append($row);
-              $carouselInner.append($carouselItem);
-              if (index < response.length - 1) {
-                  $carouselItem = $('<div class="carousel-item"></div>');
-                  $row = $('<div class="row"></div>');
-              }
-          }
-      });
-      $('#latestvideos').carousel();
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="star-rating">${starsHtml}</div>
+                <small class="duration text-muted">${item.duration}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      $row.append(cardHtml);
+      if ((index + 1) % 4 === 0 || index === response.length - 1) {
+        $carouselItem.append($row);
+        $carouselInner.append($carouselItem);
+        if (index < response.length - 1) {
+          $carouselItem = $('<div class="carousel-item"></div>');
+          $row = $('<div class="row"></div>');
+        }
+      }
+    });
+    $('#videoControl').carousel();
   },
 });
 
