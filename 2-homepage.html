@@ -126,9 +126,9 @@
     </header>
 
     <!--Quotes-->
-    <section class="pink-bg d-flex align-items-center p-5">
+    <section class="pink-bg d-flex align-items-center">
       <div id="quotes" class="row carousel slide container-md ml-5" data-ride="carousel">
-          <div class="carousel-inner my-text" id="carousel-inner"> 
+          <div class="carousel-inner my-text container mt-3 p-5" id="carousel-inner"> 
               <div id="loaderDiv" class="loader"></div> 
           </div>
           <a class="carousel-control-prev" href="#quotes" role="button" data-slide="prev">
@@ -148,20 +148,21 @@
         </h2>
 
         <div class="container-md">
-            <div id="videoControls" class="carousel slide" data-ride="carousel">
-                <div class="videos-slides-container">
+            <div id="slider" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner my-text container mt-3 p-5 text-center" id="carousel-inner"> 
                     <div class="carousel-inner text-center">
                       <div id="VideoLoader" class="loader"></div>
                         <div id="tutorial" class="d-flex">
                         </div>
                     </div>
                 </div>
-                <a class="carousel-control-prev" href="#videoControls" role="button" data-slide="prev">
-                  <span><img src="/images/arrow_black_left.png" alt="arrow left" width="50" height="80" class="whitearrow-left"></span>
-              </a>
-              <a class="carousel-control-next" href="#videoControls" role="button" data-slide="next">
-                  <span><img src="/images/arrow_black_right.png" alt="arrow right" width="50" height="80" class="whitearrow-right"></span>
-              </a>
+                <a class="carousel-control-next" href="#slider" role="button" data-slide="next">
+                  <img class="" src="/images/arrow_black_right.png" aria-hidden="true">
+                </a>
+                <a class="carousel-control-prev" href="#slider" role="button" data-slide="prev">
+                  <img class="" src="/images/arrow_black_left.png" aria-hidden="true">
+                </a>
+                </div>
         </div>       
       </section>
      

@@ -10,7 +10,7 @@ $(document).ready(function() {
           $("#loaderDiv").hide();
           for (let i = 0; i < request.length; i++) {
               let $html = $(`
-              <div class="carousel-item carousel-item-content ${i === 0 ? 'active' : ''}">
+                  <div class="carousel-item carousel-item-content ${i === 0 ? 'active' : ''}">
                   <div class="row">
                       <div class="col-sm-3 text-center">
                           <img class="rounded-circle d-block w-100" src="${request[i].pic_url}" alt="Profile Image">
@@ -37,102 +37,111 @@ $(document).ready(function() {
 
 $.ajax({
   url: 'https://smileschool-api.hbtn.info/popular-tutorials',
-  type: "get",
-  beforeSend: function () {
+  type: 'GET',
+  beforeSend: function() {
       $("#VideoLoader").show();
   },
-  success: function (response) {
+  success: function(response) {
       $("#VideoLoader").hide();
-      for (let i = 0; i < response.length; i++) {
-          let $stars = '';
-          for (let j = 0; j < response[i].star; j++) {
-              $stars += '<img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple"  width="15" height="15">';
+      let $carouselInner = $('#tutorial'); 
+      $carouselInner.empty();
+      let $carouselItem = $('<div class="carousel-item active"></div>');
+      let $row = $('<div class="row"></div>'); 
+      response.forEach((item, index) => {
+          let starsHtml = '';
+          for (let j = 0; j < item.star; j++) {
+              starsHtml += '<img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple" width="15" height="15">';
           }
-          for (let j = 0; j < 5 - response[i].star; j++) {
-              $stars += '<img src="./images/star_off.png" class="carousel-star-icon" alt="star icon filled in grey"  width="15" height="15">';
+          for (let j = item.star; j < 5; j++) {
+              starsHtml += '<img src="./images/star_off.png" class="carousel-star-icon" alt="star icon filled in grey" width="15" height="15">';
           }
-          let $html = $(`
-      <div class="text-center col-12 col-sm-6 col-md-3">
-          <div class="carousel-item active">
-              <img class="w-100" src="${response[i].thumb_url}" alt="smile image">
-              <img src="/images/play.png" alt="play"  class="play-btn rounded-circle" width="64" height="64">
-              <div class="mx-3">
-                  <div class="font-weight-bold text-dark text-left mt-3">
-                      ${response[i].title}
-                  </div>
-                  <div class="text-secondary text-left mt-3 mb-3">
-                      ${response[i]["sub-title"]}
-                  </div>
-                  <div class="d-flex align-items-center mb-3">
-                      <img src="${response[i].author_pic_url}" class="rounded-circle mr-3 video-carousel-img-profile" alt="profile image"  width="30" height="30">
-                      <div class="purple-text font-weight-bold">${response[i].author}</div>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                      <div class="d-flex pt-1">
-                      ${$stars}
-                      </div>
-                      <div class="purple-text font-weight-bold">
-                          ${response[i].duration}
+          let cardHtml = `
+              <div class="col-12 col-sm-6 col-md-3 d-flex align-items-stretch">
+                  <div class="card">
+                      <img class="card-img-top" src="${item.thumb_url}" alt="${item.title}">
+                      <div class="card-body">
+                          <h5 class="card-title">${item.title}</h5>
+                          <p class="card-text">${item["sub-title"]}</p>
+                          <div class="card-footer bg-transparent border-top-0">
+                              <img src="${item.author_pic_url}" class="rounded-circle mr-2 video-carousel-img-profile" alt="profile image" width="30" height="30">
+                              <small class="text-muted">${item.author}</small>
+                          </div>
+                          <div class="d-flex justify-content-between align-items-center">
+                              <div class="star-rating">${starsHtml}</div>
+                              <small class="duration text-muted">${item.duration}</small>
+                          </div>
                       </div>
                   </div>
               </div>
-          </div>
-      </div>`);
-          $("#tutorial").append($html);
-      }
+          `;
+          $row.append(cardHtml);
+          if ((index + 1) % 4 === 0 || index === response.length - 1) {
+              $carouselItem.append($row);
+              $carouselInner.append($carouselItem);
+              if (index < response.length - 1) {
+                  $carouselItem = $('<div class="carousel-item"></div>');
+                  $row = $('<div class="row"></div>');
+              }
+          }
+      });
+      $('#slider').carousel();
   },
 });
 
 //latest video
 $.ajax({
-    url: 'https://smileschool-api.hbtn.info/latest-videos',
-    type: "get",
-    beforeSend: function() {
-      $("#myloader").show(); // Show the loader before making the request
-    },
-    success: function(response) {
+  url: 'https://smileschool-api.hbtn.info/latest-videos',
+  type: 'GET',
+  beforeSend: function() {
+      $("#myloader").show();
+  },
+  success: function(response) {
       $("#myloader").hide();
-      for (let i = 0; i < response.length; i++) {
-        let $play_button = '<img src="images/play.png" alt="Play" width="64px" class="align-self-center play-overlay"/>';
-        let $card_stars = '';
-        for (let j = 0; j < response[i].star; j++) {
-          $card_stars += '<img src="images/star_on.png" class=" star-size mr-1" alt="..." width="15" height="15">';
-        }
-        for (let j = 0; j < 5 - response[i].star; j++) {
-          $card_stars += '<img src="images/star_off.png" class=" star-size" alt="..." width="15" height="15">';
-        }
-        let $html = $(`
-          <div class="text-center col-12 col-sm-6 col-md-3">
-            <div class="carousel-item active">
-              <img class="w-100" src="${response[i].thumb_url}" alt="">
-              <div class="mx-3">
-                <div class="font-weight-bold text-dark text-left mt-3">
-                  ${response[i].title}
-                </div>
-                <div class="text-secondary text-left mt-3 mb-3">
-                  ${response[i]["sub-title"]}
-                </div>
-                <div class="">
-                  ${$play_button}
-                  <img src="${response[i].author_pic_url}" class="carousel-img rounded-circle mr-3" alt="..."   width="30" height="30">
-                  <div class="pink-text font-weight-bold">${response[i].author}</div>
-                </div>
-                <div class="d-flex justify-content-between mb-5">
-                  <div class="d-flex pt-1">
-                    ${$card_stars}
+      let $carouselInner = $('#latestvideos'); 
+      $carouselInner.empty();
+      let $carouselItem = $('<div class="carousel-item active"></div>');
+      let $row = $('<div class="row"></div>'); 
+      response.forEach((item, index) => {
+          let starsHtml = '';
+          for (let j = 0; j < item.star; j++) {
+              starsHtml += '<img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple" width="15" height="15">';
+          }
+          for (let j = item.star; j < 5; j++) {
+              starsHtml += '<img src="./images/star_off.png" class="carousel-star-icon" alt="star icon filled in grey" width="15" height="15">';
+          }
+          let cardHtml = `
+              <div class="col-12 col-sm-6 col-md-3 d-flex align-items-stretch">
+                  <div class="card">
+                      <img class="card-img-top" src="${item.thumb_url}" alt="${item.title}">
+                      <div class="card-body">
+                          <h5 class="card-title">${item.title}</h5>
+                          <p class="card-text">${item["sub-title"]}</p>
+                          <div class="card-footer bg-transparent border-top-0">
+                              <img src="${item.author_pic_url}" class="rounded-circle mr-2 video-carousel-img-profile" alt="profile image" width="30" height="30">
+                              <small class="text-muted">${item.author}</small>
+                          </div>
+                          <div class="d-flex justify-content-between align-items-center">
+                              <div class="star-rating">${starsHtml}</div>
+                              <small class="duration text-muted">${item.duration}</small>
+                          </div>
+                      </div>
                   </div>
-                  <div class="purple-text font-weight-bold">
-                    ${response[i].duration}
-                  </div>
-                </div>
               </div>
-            </div>
-          </div>`);
-        $("#latestvideos").append($html);
-      }
-    }
-  });
-  
+          `;
+          $row.append(cardHtml);
+          if ((index + 1) % 4 === 0 || index === response.length - 1) {
+              $carouselItem.append($row);
+              $carouselInner.append($carouselItem);
+              if (index < response.length - 1) {
+                  $carouselItem = $('<div class="carousel-item"></div>');
+                  $row = $('<div class="row"></div>');
+              }
+          }
+      });
+      $('#latestvideos').carousel();
+  },
+});
+
   //courses
   $.ajax({
     url: 'https://smileschool-api.hbtn.info/courses',
